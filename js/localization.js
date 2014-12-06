@@ -1,7 +1,7 @@
 ﻿/**
  * Tilt - A puzzle game
  * @version v1.0.2 - 2014-12-06
- * @link
+ * @link https://github.com/ahackel/tilt
  * @author Andreas Hackel <http://www.andreashackel.de>
  * @license Creative Commons BY-NC License, http://creativecommons.org/licenses/by-nc/4.0/
  */
