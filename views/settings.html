@@ -1,0 +1,15 @@
+<view id="scn-settings">
+
+    <ah-button id="btn-music" ng-click="audio.musicMuted = !audio.musicMuted" class="small" ng-bind="(audio.musicMuted) ? 'o' : 'n'"></ah-button>
+    <ah-button id="btn-sound" ng-click="audio.soundMuted = !audio.soundMuted" class="small" ng-bind="(audio.soundMuted) ? 'h' : 'g'"></ah-button>
+    <ah-button id="btn-language" ng-click="go('/languages')">{{ 'Language' | loc }}</ah-button>
+    <ah-button id="btn-reset-progress" ng-click="resetProgress()" ng-disabled="isReset()">{{ 'Reset Game' | loc }}</ah-button>
+    <ah-button id="btn-restore-transactions" ng-if="false" ng-click="restorePurchase()" ng-disabled="isFreeEdition() == false">{{ 'Restore Purchase' | loc }}</ah-button>
+    <ah-button id="btn-unlock-all" ng-if="isDeveloper" ng-click="unlockAllLevels()" ng-disabled="allLevelsUnlocked()">{{ 'Unlock all levels' | loc }}</ah-button>
+    <ah-button id="btn-about" ng-click="go('/about')">{{ 'Credits' | loc }}</ah-button>
+
+    <header class="menu-bar">
+        <ah-button class="small" ng-click="go('/main')">e</ah-button>
+    </header>
+
+</view>

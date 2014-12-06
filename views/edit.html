@@ -1,0 +1,18 @@
+<view id="scn-game" ng-class="{ 'no-bounds': game.noBounds }">
+
+    <header  id="infobar">
+        <p id="title">{{game.levelName}}</p>
+    </header>
+
+    <editor></editor>
+
+    <header class="menu-bar">
+        <ah-button id="btn-pause" ng-click="game.pause()" class="small">i</ah-button>
+        <ah-button id="btn-noBounds" ng-click="game.editor.toggleNoBounds()" class="small">u</ah-button>
+        <ah-button id="btn-play" ng-click="game.editor.play()" class="small">b</ah-button>
+    </header>
+
+
+    <div div class="screen" id="scn-pause" ng-controller="PauseCtrl" ng-include src="'views/pause.html'" ng-if="game.isPaused || game.isGameOver" ng-animate="{leave:'fade-hide'}"></div>
+
+</view>

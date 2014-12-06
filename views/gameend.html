@@ -1,0 +1,26 @@
+<view id="scn-gameend">
+
+    <div id="title">{{ 'Well Done!' | loc }}</div>
+    <!--div id="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div-->
+    <p>{{ 'Thank you for playing Tilt!' | loc }}</p>
+    <p ng-show="isFreeEdition()">{{ 'Ready for more?' | loc }}</p>
+    <p ng-show="isFreeEdition()">{{ 'GAME_END_FREE' | loc }}</p>
+    <p ng-hide="isFreeEdition()">{{ 'GAME_END_FULL' | loc }}</p>
+
+    <button ng-click="getFullVersion()" class="button highlighted"
+            ng-show="isFreeEdition()">{{ 'Get Full Version' | loc }}</button>
+
+    <button ng-click="go('/about')" class="button"
+            ng-hide="isFreeEdition()">{{ 'Credits' | loc }}</button>
+
+    <div class="menu-bar">
+        <ah-button id="btn-back" ng-click="go('/main')" class="button small">e</ah-button>
+    </div>
+
+</view>

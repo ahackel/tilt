@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="80px" height="80px" viewBox="0 0 80 80" enable-background="new 0 0 80 80" xml:space="preserve">
+<g>
+	
+		<line id="line" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.78" x1="10" y1="40" x2="20.345" y2="40"/>
+	
+		<line id="line_1_" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.86" x1="14.019" y1="25" x2="22.978" y2="30.172"/>
+	
+		<line id="line_2_" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.92" x1="25" y1="14.019" x2="30.173" y2="22.978"/>
+	
+		<line id="line_3_" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" x1="40" y1="10" x2="40" y2="20.345"/>
+	
+		<line id="line_4_" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.16" x1="55" y1="14.019" x2="49.828" y2="22.978"/>
+	
+		<line id="line_5_" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.22" x1="65.98" y1="25" x2="57.023" y2="30.172"/>
+	
+		<line id="line_6_" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.3" x1="70" y1="40" x2="59.654" y2="40"/>
+	
+		<line id="line_7_" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.38" x1="65.98" y1="55.001" x2="57.023" y2="49.828"/>
+	
+		<line id="line_8_" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.46" x1="55" y1="65.981" x2="49.828" y2="57.022"/>
+	
+		<line id="line_9_" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.54" x1="40" y1="70" x2="40" y2="59.655"/>
+	
+		<line id="line_10_" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.62" x1="25" y1="65.981" x2="30.173" y2="57.022"/>
+	
+		<line id="line_11_" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity="0.7" x1="14.019" y1="55.001" x2="22.978" y2="49.828"/>
+	
+		<animateTransform  type="rotate" fill="remove" keyTimes="0;.0833;.166;.25;.3333;.4166;.5;.5833;.6666;.75;.8333;.9166;1" values="0,40,40;30,40,40;60,40,40;90,40,40;120,40,40;150,40,40;180,40,40;210,40,40;240,40,40;270,40,40;300,40,40;330,40,40;360,40,40" accumulate="none" additive="replace" restart="always" repeatCount="indefinite" dur="1s" begin="0s" attributeType="XML" attributeName="transform" calcMode="discrete">
+		</animateTransform>
+</g>
+</svg>

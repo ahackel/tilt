@@ -1,0 +1,23 @@
+<view id="scn-game" ng-class="{ 'no-bounds': game.noBounds }">
+
+    <div id="infobar">
+        <p id="title">{{game.levelName | loc }}</p>
+        <p id="moves"><span class="smaller">{{ 'Moves' | loc }} </span>{{game.moves}}</p>
+    </div>
+
+    <board ng-hide="game.isPaused"></board>
+
+    <header class="menu-bar">
+        <ah-button id="btn-pause" ng-click="game.pause()" ng-disabled="game.isGameOver" class="small">i</ah-button>
+        <ah-button id="btn-reload" ng-click="game.reset()" ng-disabled="game.isGameOver" class="small">d</ah-button>
+
+        <ah-button id="btn-undo" ng-click="game.undo()" ng-disabled="!game.canUndo" class="small">j</ah-button>
+        <ah-button id="btn-edit" ng-click="go('/edit/' + game.levelId)" ng-disabled="game.isGameOver" ng-show="canEdit" class="small">c</ah-button>
+    </header>
+
+    <div id="fps" ng-if="debug">CACHE {{ getCacheSize() }} | FPS {{ game.fps | number:0 }}</div>
+
+    <div class="screen" id="scn-pause" ng-controller="PauseCtrl" ng-include src="'views/pause.html'" ng-if="game.isPaused"></div>
+
+
+</view>

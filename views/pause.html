@@ -1,0 +1,46 @@
+
+    <div id="title">{{ title | loc }}</div>
+    <div id="stars">
+        <div ng-class="{star: true, empty: stars < 1}" ng-show="game.isGameOver"></div>
+        <div ng-class="{star: true, empty: stars < 2}" ng-show="game.isGameOver"></div>
+        <div ng-class="{star: true, empty: stars < 3}" ng-show="game.isGameOver"></div>
+        <div ng-class="{star: true}" ng-show="game.isGameOver && stars > 3"></div>
+    </div>
+    <table id="message">
+        <tr>
+            <th></th>
+            <th ng-show="game.bestMoves">{{ 'You' | loc }}</th>
+            <th id="lbl-record" ng-show="game.bestMoves">{{ 'Record' | loc }}</th>
+        </tr>
+        <tr>
+            <td>{{ 'Moves' | loc }}</td>
+            <td>{{ game.moves }}</td>
+            <td>{{ game.bestMoves }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'Time' | loc }}</td>
+            <td>{{ game.time | timespan }}</td>
+            <td>{{ game.bestTime | timespan }}</td>
+        </tr>
+        <tr id="row-score">
+            <td>{{ 'Score' | loc }}</td>
+            <td>{{ score }}</td>
+            <td>{{ game.bestScore }}</td>
+        </tr>
+    </table>
+    <p id="new-record" ng-show="isNewRecord">{{ 'New Record!' | loc }}</p>
+    <p id="min-moves" ng-show="showMinMoves" style="display: none" ng-animate="'fade'">{{ 'Try to solve this level with $0 moves!' | loc | replace:game.minMoves }}</p>
+    <p id="dev-beaten" ng-show="devBeaten" style="display: none"
+       ng-animate="'fade'">{{ 'You have beaten the developer by $0 moves!' | loc | replace:(game.minMoves - game.moves) }}</p>
+
+    <header ng-show="showButtons" id="buttons">
+        <ah-button id="btn-music" ng-click="audio.musicMuted = !audio.musicMuted" class="small"
+            ng-bind="(audio.musicMuted) ? 'o' : 'n'" ng-hide="game.isGameOver"></ah-button>
+        <ah-button id="btn-sound" ng-click="audio.soundMuted = !audio.soundMuted" class="small"
+            ng-bind="(audio.soundMuted) ? 'h' : 'g'" ng-hide="game.isGameOver"></ah-button>
+        <ah-button id="btn-levels" ng-click="go('/levels')" class="ah-button small">v</ah-button>
+        <ah-button id="btn-continue" ng-click="game.resume()" class="ah-button small highlighted" ng-hide="game.isGameOver">b</ah-button>
+        <ah-button id="btn-reload" ng-click="game.reset()" class="ah-button small" ng-show="game.isGameOver">d</ah-button>
+        <ah-button id="btn-proceed" ng-click="game.startNextLevel()" class="ah-button small highlighted" ng-show="game.isGameOver">f</ah-button>
+    </header>
+

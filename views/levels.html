@@ -1,0 +1,24 @@
+<view id="scn-levels">
+
+    <header id="nav-bar">
+        <ah-button id="btn-prev" class="button text" ng-show="categoryIndex > 0" ng-click="categoryIndex = categoryIndex - 1">&lt;</ah-button>
+        <h2 id="title" class="title">{{title.text | loc}}</h2>
+        <ah-button id="btn-next" class="button text" ng-show="categoryIndex < categories.length - 1" ng-click="categoryIndex = categoryIndex + 1">&gt;</ah-button>
+    </header>
+
+    <ul rn-carousel rn-carousel-buffered rn-carousel-indicator rn-carousel-index="categoryIndex">
+
+        <li ng-repeat="category in categories" ng-controller="CategoryCtrl" class="category">
+            <level ng-click="play(level.id)" ah-id="{{level.id}}" ah-locked="{{level.locked}}"
+                   ng-class="{ 'no-bounds': level.noBounds, 'highlighted': level.isCurrentLevel }"
+                   ng-repeat="level in levels">
+                <stars ng-hide="level.locked" ah-count="{{level.stars}}"></stars>
+            </level>
+        </li>
+    </ul>
+
+    <header class="menu-bar">
+        <ah-button ng-click="go('/main')" class="small">e</ah-button>
+    </header>
+
+</view>

@@ -1,0 +1,11 @@
+<view id="scn-main">
+
+    <div class="logo" ng-class="{ 'free': isFreeEdition() }"></div>
+
+    <ah-button id="btn-play" ng-click="go('/levels')" class="highlighted">{{ 'Play' | loc }}</ah-button>
+    <ah-button id="btn-get-full-version" ng-click="getFullVersion()" ng-show="isFreeEdition()">{{ 'Get Full Version' | loc }}</ah-button>
+    <ah-button id="btn-settings" class="small" ng-click="go('/settings')">k</ah-button>
+    <ah-button id="btn-achievements" class="small" ng-click="showLeaderboard()">l</ah-button>
+    <ah-button id="btn-facebook" class="small" ng-click="openFacebook()">s</ah-button>
+
+</view>

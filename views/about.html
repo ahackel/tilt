@@ -1,0 +1,13 @@
+<view id="scn-about">
+
+    <div id="scroll">
+        <div class="logo"></div>
+        <div id="version" ng-bind = "'Version $0' | loc | replace:version"></div>
+        <div id="credits" ng-bind-html-unsafe="'CREDITS' | loc | replace:betaTesters:specialThanks"></div>
+    </div>
+
+    <header class="menu-bar">
+        <ah-button class="small" ng-click="go('/settings')">e</ah-button>
+    </header>
+
+</view>

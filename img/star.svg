@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="80px" height="80px" viewBox="0 0 80 80" enable-background="new 0 0 80 80" xml:space="preserve">
+<g>
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="293.1279" y1="-316.8628" x2="308.169" y2="-375.0454" gradientTransform="matrix(1 0 0 -1 -257.5996 -300.9004)">
+		<stop  offset="0.3212" style="stop-color:#FFF400"/>
+		<stop  offset="0.3719" style="stop-color:#FFE900"/>
+		<stop  offset="0.6568" style="stop-color:#FFB100"/>
+		<stop  offset="0.8684" style="stop-color:#FF8D00"/>
+		<stop  offset="0.9818" style="stop-color:#FF8000"/>
+	</linearGradient>
+	<polygon fill="url(#SVGID_1_)" points="40,11.47 49.271,30.255 70,33.263 54.997,47.885 58.542,68.529 40,58.787 21.458,68.529 
+		25.002,47.885 10,33.263 30.729,30.255 	"/>
+	<g>
+		<path fill="#F7941E" d="M40,18.249l6.58,13.334l0.698,1.415l1.562,0.227l14.712,2.134L52.903,45.736l-1.13,1.102l0.267,1.555
+			l2.517,14.654l-13.161-6.915L40,55.398l-1.396,0.733l-13.161,6.915l2.515-14.654l0.267-1.555l-1.13-1.102L16.448,35.358
+			l14.711-2.134l1.562-0.227l0.698-1.415L40,18.249 M40,11.47l-9.271,18.785L10,33.263l15.002,14.622l-3.543,20.645L40,58.787
+			l18.542,9.742l-3.545-20.645L70,33.263l-20.729-3.007L40,11.47L40,11.47z"/>
+	</g>
+	<g>
+		<path fill="#FFF13D" d="M40,20.77l6.071,12.305l0.466,0.943l1.041,0.151l13.576,1.969l-9.825,9.576l-0.754,0.734l0.179,1.036
+			l2.321,13.522l-12.145-6.381L40,54.138l-0.93,0.488l-12.145,6.381l2.321-13.522l0.178-1.036l-0.753-0.734l-9.826-9.576
+			l13.576-1.969l1.041-0.151l0.465-0.943L40,20.77 M40,16.25l-7.866,15.939l-17.588,2.552l12.729,12.406l-3.006,17.516L40,56.396
+			l15.731,8.266l-3.007-17.516l12.729-12.406l-17.588-2.552L40,16.25L40,16.25z"/>
+	</g>
+</g>
+</svg>
