@@ -28,13 +28,13 @@ tiltApp.factory('localize', function($http, $rootScope) {
         },
 
         loadLanguage: function (newLanguage) {
-            if (localize.languageLoaded != newLanguage) {
-                localize.languageLoaded = newLanguage;
-                console.log('loading language', newLanguage);
-                var url = 'loc/' + localize.language + '.json';
-                $http({ method:"GET", url:url, cache:false }).success(localize.successCallback);
-                return true;
-            }
+            // if (localize.languageLoaded != newLanguage) {
+            //     localize.languageLoaded = newLanguage;
+            //     console.log('loading language', newLanguage);
+            //     var url = 'loc/' + localize.language + '.json';
+            //     $http({ method:"GET", url:url, cache:false }).success(localize.successCallback);
+            //     return true;
+            // }
             return false;
         },
 

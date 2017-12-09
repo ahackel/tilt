@@ -8,7 +8,7 @@
 
 'use strict';
 
-tiltApp.factory('levels', function(store) {
+tiltApp.factory('levels', function() {
 
 	var _categories = ["Simple", "Beginner", "Nobounds", "Advanced"],
 
@@ -87,14 +87,10 @@ tiltApp.factory('levels', function(store) {
 ];
 
 	function init() {
-		if (store.has('level_pack_1')) {
-			// allow custom levels only in full version
-
-			var storedLevels = JSON.parse(localStorage.getItem("levels"));
-			if (storedLevels) {
-				_levels = storedLevels.concat(_levels);
-				_categories.unshift('Custom');
-			}
+		var storedLevels = JSON.parse(localStorage.getItem("levels"));
+		if (storedLevels) {
+			_levels = storedLevels.concat(_levels);
+			_categories.unshift('Custom');
 		}
 	}
 
@@ -123,10 +119,7 @@ tiltApp.factory('levels', function(store) {
 	}
 
 	function getCategory(index) {
-		if (!store.has('level_pack_1') && index > 0)
-			return null;
-		else
-			return _categories[index];
+		return _categories[index];
 	}
 
 	function getByCategory(category) {
@@ -197,9 +190,6 @@ tiltApp.factory('levels', function(store) {
 	function getNextLevel(id){
 		var index = getIndex(id);
 		if (index > -1) {
-			if (!store.has('level_pack_1') && index >= 15)
-				return null;
-
 			if (index < _levels.length - 1)
 				return _levels[index + 1].id;
 		}
@@ -234,8 +224,8 @@ tiltApp.factory('levels', function(store) {
 		getByCategory: getByCategory,
 		getIndex: getIndex,
 		getCategoryIndex: getCategoryIndex,
-		get length() { return (store.has('level_pack_1')) ? _levels.length : 16; },
-		get lengthCategories() { return (store.has('level_pack_1')) ? _categories.length : 1; },
+		get length() { return _levels.length; },
+		get lengthCategories() { return _categories.length; },
 		getCategoryFromId: getCategoryFromId,
 		getNameFromId: getNameFromId,
 		countElements: countElements,
@@ -250,5 +240,3 @@ tiltApp.factory('levels', function(store) {
 
 	return levels;
 });
-
-

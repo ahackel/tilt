@@ -75,7 +75,7 @@ var tilt = (function() {
 
 // Cheats:
 	function unlockAllLevels() {
-		that.UNLOCK_ALL_LEVELS = ! that.UNLOCK_ALL_LEVELS;
+		tilt.UNLOCK_ALL_LEVELS = ! tilt.UNLOCK_ALL_LEVELS;
         // to do: force $apply
 	}
 
@@ -107,7 +107,7 @@ var tilt = (function() {
 		edit: edit
     };
 
-    tilt.VERSION = "1.0.2";
+    tilt.VERSION = "1.0.3";
 	tilt.REVISION = 184;
 	tilt.PIXEL_RATIO = window.devicePixelRatio || 1;
     tilt.IPHONE = /iPhone/i.test(navigator.userAgent);
@@ -165,7 +165,7 @@ var tilt = (function() {
     tilt.COLOR_BACKGROUND = "#708404"; //"#446e20";
     tilt.UNLOCK_ALL_LEVELS = (localStorage['unlockAllLevels'] === 'true');
     tilt.DEBUG = false;
-	tilt.DEVELOPER = false;
+	tilt.DEVELOPER = true;
     tilt.EDITOR = tilt.DEVELOPER && !tilt.MOBILE;
     tilt.GYRO_ENABLED = false;
 	tilt.LANGUAGES = ['en', 'de', 'es', 'fr', 'jp', 'kr']
@@ -183,4 +183,3 @@ var tilt = (function() {
 
     return tilt;
 })();
-

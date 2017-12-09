@@ -8,26 +8,26 @@
 
 "use strict";
 
-var tiltApp = angular.module('tiltApp', ['ngMobile', 'angular-carousel']);
+var tiltApp = angular.module('tiltApp', ['ngRoute', 'angular-carousel']);
 
 tiltApp.config(function($routeProvider, $locationProvider){
     //$locationProvider.html5Mode(true);
     $routeProvider.
-        when('/main', { controller: MainCtrl, templateUrl: 'views/main.html' }).
-        when('/levels', { controller: LevelsCtrl, templateUrl: 'views/levels.html' }).
-        when('/play/:category/:name', { controller: PlayCtrl, templateUrl: 'views/play.html' }).
-        when('/edit', { controller: EditCtrl, templateUrl: 'views/edit.html' }).
-        when('/edit/:category/:name', { controller: EditCtrl, templateUrl: 'views/edit.html' }).
-        when('/pause', { controller: PauseCtrl, templateUrl: 'views/pause.html' }).
-        when('/settings', { controller: SettingsCtrl, templateUrl: 'views/settings.html' }).
-        when('/languages', { controller: LanguagesCtrl, templateUrl: 'views/languages.html' }).
-        when('/about', { controller: AboutCtrl, templateUrl: 'views/about.html' }).
-        when('/gameend', { controller: GameEndCtrl, templateUrl: 'views/gameend.html' }).
+        when('/main', { controller: 'MainCtrl', templateUrl: 'views/main.html' }).
+        when('/levels', { controller: 'LevelsCtrl', templateUrl: 'views/levels.html' }).
+        when('/play/:category/:name', { controller: 'PlayCtrl', templateUrl: 'views/play.html' }).
+        when('/edit', { controller: 'EditCtrl', templateUrl: 'views/edit.html' }).
+        when('/edit/:category/:name', { controller: 'EditCtrl', templateUrl: 'views/edit.html' }).
+        when('/pause', { controller: 'PauseCtrl', templateUrl: 'views/pause.html' }).
+        when('/settings', { controller: 'SettingsCtrl', templateUrl: 'views/settings.html' }).
+        when('/languages', { controller: 'LanguagesCtrl', templateUrl: 'views/languages.html' }).
+        when('/about', { controller: 'AboutCtrl', templateUrl: 'views/about.html' }).
+        when('/gameend', { controller: 'GameEndCtrl', templateUrl: 'views/gameend.html' }).
         otherwise({ redirectTo:'/main' })
 });
 
 
-tiltApp.run(function($rootScope, $location, $window, audio, store){
+tiltApp.run(function($rootScope, $location, $window, audio){
 
     $rootScope.resourcesLoaded = false;
 
@@ -51,7 +51,6 @@ tiltApp.run(function($rootScope, $location, $window, audio, store){
 	$rootScope.isFreeEdition = function() {
 		// tilt always has all levels:
 		return false;
-		return !store.has('level_pack_1');
 	};
 
 	$rootScope.isLoading = function() {
@@ -200,7 +199,7 @@ tiltApp.directive('level', function(levels){
 				'd': 140
 			};
 
-			var cached = true; //tilt.IPHONE && !tilt.IPHONE5; // use cache on low-end platfporms (iPhone 4)
+			var cached = false; //tilt.IPHONE && !tilt.IPHONE5; // use cache on low-end platfporms (iPhone 4)
 
             var id = iAttrs['ahId'],
 				locked = (iAttrs['ahLocked'] === "true") ? true : false;
@@ -265,7 +264,7 @@ tiltApp.directive('level', function(levels){
     }
 });
 
-function AppCtrl($scope, $timeout, store, game) {
+tiltApp.controller('AppCtrl', function AppCtrl($scope, $timeout, game) {
 
 	tilt.loadingStack['routeChange'] = true;
 	$scope.game = game;
@@ -283,10 +282,10 @@ function AppCtrl($scope, $timeout, store, game) {
 		});
 	});
 
-	$scope.isIdle = function(){ return store.isIdle; };
-}
+	$scope.isIdle = function(){ return false; };
+});
 
-function LoadingCtrl($scope, $timeout, store, audio, $rootScope, game) {
+tiltApp.controller('LoadingCtrl', function LoadingCtrl($scope, $timeout, audio, $rootScope, game) {
     $rootScope.resourcesLoaded = (navigator.splashscreen);
 	$scope.progress = 0;
 
@@ -329,27 +328,6 @@ function LoadingCtrl($scope, $timeout, store, audio, $rootScope, game) {
 				}
 			}, false);
 
-			if (window.plugins.gameCenter) {
-				window.plugins.gameCenter.authenticate();
-			}
-
-			if (!store.has('level_pack_1') && window.plugins && window.plugins.iAdPlugin) {
-
-				window.plugins.iAdPlugin.prepare(true);
-
-				document.addEventListener("iAdBannerViewDidLoadAdEvent", function(){
-					//console.log("new iAd");
-					if (!store.has('level_pack_1'))
-						window.plugins.iAdPlugin.showAd(true);
-				}, false);
-
-				document.addEventListener("iAdBannerViewDidFailToReceiveAdWithErrorEvent", function(event){
-					//console.log("iAd Error", event.error);
-					window.plugins.iAdPlugin.showAd(false);
-				}, false);
-
-				console.log('enabled iAd support.');
-			}
 		}
 
         if (navigator.splashscreen)
@@ -357,22 +335,15 @@ function LoadingCtrl($scope, $timeout, store, audio, $rootScope, game) {
      }
 
      updateProgress();
-}
+});
 
-function MainCtrl($scope, store) {
-	$scope.getFullVersion = function(){ store.buy('level_pack_1'); };
-	$scope.showLeaderboard = function(){
-		if (tilt.DEVELOPER && window.plugins && window.plugins.testFlight) {
-			window.plugins.testFlight.passCheckpoint(function(){}, function(){}, 'Viewing Leaderboards');
-		}
-		window.plugins.gameCenter.showLeaderboard();
-	}
+tiltApp.controller('MainCtrl', function MainCtrl($scope) {
 	$scope.openFacebook = function(){
 		window.open("http://facebook.com/tiltgame", '_system');
 	};
-}
+});
 
-function LevelsCtrl($scope, progress, levels) {
+tiltApp.controller('LevelsCtrl', function LevelsCtrl($scope, progress, levels) {
 	$scope.title = { text: "Simple" };
 	$scope.categoryIndex = levels.getCategoryIndex(progress.currentCategory);
 	if ($scope.categoryIndex < 0)
@@ -385,9 +356,9 @@ function LevelsCtrl($scope, progress, levels) {
         if (!progress.isCategoryLocked(category))
             $scope.categories.push(category);
     }
-}
+});
 
-function CategoryCtrl($scope, $location, $timeout, progress, levels, audio) {
+tiltApp.controller('CategoryCtrl', function CategoryCtrl($scope, $location, $timeout, progress, levels, audio) {
 	$scope.levels = [];
 
 	//workaround for levels starting immediately:
@@ -421,9 +392,9 @@ function CategoryCtrl($scope, $location, $timeout, progress, levels, audio) {
 			$location.path('/play/'+id);
 		}
 	}
-}
+});
 
-function PlayCtrl($scope, $routeParams, game) {
+tiltApp.controller('PlayCtrl', function PlayCtrl($scope, $routeParams, game) {
     $scope.game = game;
     $scope.replay = tilt.replay;
     $scope.canEdit = tilt.EDITOR;
@@ -437,17 +408,17 @@ function PlayCtrl($scope, $routeParams, game) {
 	$scope.debug = tilt.DEBUG;
 	$scope.getCacheSize = function(){ return Object.keys(tilt.bitmapCache.items).length; }
 	$scope.getDrawCalls = function(){ return tilt.bitmapCache.drawCalls; }
-}
+});
 
-function EditCtrl($scope, $routeParams, game) {
+tiltApp.controller('EditCtrl', function EditCtrl($scope, $routeParams, game) {
     $scope.game = game;
     var id = $routeParams.category + "/" + $routeParams.name;
     $scope.$on('$viewContentLoaded', function() {
         game.editor.edit(id);
     });
-}
+});
 
-function PauseCtrl($scope, $timeout, game, audio) {
+tiltApp.controller('PauseCtrl', function PauseCtrl($scope, $timeout, game, audio) {
     var cancelUpdate;
 
 	$scope.game = game;
@@ -514,9 +485,9 @@ function PauseCtrl($scope, $timeout, game, audio) {
 	$scope.$on('$destroy', function(){
 		$timeout.cancel(cancelUpdate);
 	});
-}
+});
 
-function SettingsCtrl($scope, progress, store, localize) {
+tiltApp.controller('SettingsCtrl', function SettingsCtrl($scope, progress, localize) {
     $scope.audio = tilt.audio;
 
     $scope.isReset = function(){ return progress.isReset; }
@@ -525,34 +496,21 @@ function SettingsCtrl($scope, progress, store, localize) {
 
     $scope.resetProgress = function() {
         progress.reset();
-		store.updateItems();
 		localize.updateLanguage();
 		tilt.UNLOCK_ALL_LEVELS = false;
-
-		if (tilt.DEVELOPER && window.plugins && window.plugins.testFlight) {
-			window.plugins.testFlight.passCheckpoint(function(){}, function(){}, 'Reset game');
-		}
     }
-
-	$scope.restorePurchase = function(){
-		console.log('restoring...');
-		store.restorePurchase();
-	};
 
 	$scope.unlockAllLevels = function(){
 		tilt.UNLOCK_ALL_LEVELS = true;
 		localStorage['unlockAllLevels'] = 'true';
-		if (tilt.DEVELOPER && window.plugins && window.plugins.testFlight) {
-			window.plugins.testFlight.passCheckpoint(function(){}, function(){}, 'Unlocked all levels');
-		}
 	};
 
 	$scope.allLevelsUnlocked = function() {
 		return tilt.UNLOCK_ALL_LEVELS;
 	}
-}
+});
 
-function LanguagesCtrl($scope, localize, $location) {
+tiltApp.controller('LanguagesCtrl', function LanguagesCtrl($scope, localize, $location) {
     $scope.languages = localize.languages;
 
     $scope.swapLanguage = function(language) {
@@ -563,9 +521,9 @@ function LanguagesCtrl($scope, localize, $location) {
 			window.plugins.testFlight.passCheckpoint(function(){}, function(){}, 'Set language to ' + language);
 		}
     }
-}
+});
 
-function AboutCtrl($scope, localize) {
+tiltApp.controller('AboutCtrl', function AboutCtrl($scope, localize) {
 	$scope.betaTesters = tilt.BETA_TESTERS.join('<br>');
 	$scope.specialThanks = tilt.SPECIAL_THANKS.join('<br>');
 
@@ -573,16 +531,9 @@ function AboutCtrl($scope, localize) {
 	if (tilt.DEVELOPER && window.plugins && window.plugins.testFlight) {
 		window.plugins.testFlight.passCheckpoint(function(){}, function(){}, 'Showing credits');
 	}
-}
+});
 
-function GameEndCtrl($scope, store, progress) {
-	$scope.getFullVersion = function() {
-		store.buy('level_pack_1');
-	}
-
-	if (tilt.DEVELOPER && window.plugins && window.plugins.testFlight) {
-		window.plugins.testFlight.passCheckpoint(function(){}, function(){}, 'Reached game end screen');
-	}
+function GameEndCtrl($scope, progress) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {

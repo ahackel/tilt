@@ -227,7 +227,6 @@ button:active {
   	border-color: darken(@buttoncolor, 5);
 	box-shadow: 0 0 0.05rem #160e08;
   	animation: none;
-  	-webkit-animation: none;
 }
 
 @-webkit-keyframes button_pulsate {
@@ -237,8 +236,9 @@ button:active {
 }
 
 .highlighted {
-	-webkit-animation: button_pulsate 1.2s ease 0 infinite;
-	animation: button_pulsate 1.2s ease 0 infinite;
+	animation-name: button_pulsate;
+	animation-duration: 1.2s;
+	animation-iteration-count: infinite;
 }
 
 button.text,
@@ -330,8 +330,7 @@ button:disabled {
 	left: -3rem;
 	top: 0.5rem;
 	position: absolute;
-	-webkit-animation: logo_move_down 1s ease 0 1;
-	animation: logo_move_down 1s ease 0 1;
+	animation: 1s ease 1s logo_move_down;
 }
 
 .logo.free {
@@ -361,7 +360,6 @@ button:disabled {
 }
 
 #scn-about .logo {
-  -webkit-animation: none;
   animation: none;
 }
 
@@ -379,8 +377,10 @@ button:disabled {
 }
 
 #scn-about #scroll {
-  -webkit-animation: credits_scroll @creditsduration linear 0 infinite;
-  animation: credits_scroll @creditsduration linear 0 infinite;
+  animation-duration: @creditsduration;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: credits_scroll;
   position: relative;
 }
 
@@ -408,10 +408,11 @@ button:disabled {
 
 /* Load level menu styles */
 
-#scn-levels .rn-carousel-container {
+#scn-levels ul[rn-carousel] {
   width: 100% !important;
   height: 100%;
   position: absolute;
+  margin-top: 0;
 }
 
 #scn-levels .rn-carousel-slides {
@@ -512,10 +513,7 @@ button:disabled {
 
 #scn-levels .level:active {
 	animation: none;
-  	-webkit-animation: none;
 }
-
-
 
 @thumbcolorlightnobounds: #111538;
 @thumbcolordarknobounds: #000024;
@@ -940,7 +938,3 @@ th {
   .screen.no-bounds { background-image : url("../img/background_nobounds_low.png"); }
 
 }
-
-
-
-
