@@ -229,6 +229,8 @@ button:active {
   	animation: none;
 }
 
+button:focus {outline:0;}
+
 @-webkit-keyframes button_pulsate {
   0% { -webkit-transform: scale(1.0); }
   50% { -webkit-transform: scale(1.08); }
@@ -330,7 +332,7 @@ button:disabled {
 	left: -3rem;
 	top: 0.5rem;
 	position: absolute;
-	animation: 1s ease 1s logo_move_down;
+	animation: 1s ease 0 logo_move_down;
 }
 
 .logo.free {
