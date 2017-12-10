@@ -8,33 +8,6 @@
 
 'use strict';
 
-// requestAnimationFrame polyfill by Paul Irish:
-
-(function() {
-	var lastTime = 0;
-	var vendors = ['webkit', 'moz'];
-	for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-		window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-		window.cancelAnimationFrame =
-			window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
-	}
-
-	if (!window.requestAnimationFrame)
-		window.requestAnimationFrame = function(callback, element) {
-			var currTime = new Date().getTime();
-			var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-			var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-				timeToCall);
-			lastTime = currTime + timeToCall;
-			return id;
-		};
-
-	if (!window.cancelAnimationFrame)
-		window.cancelAnimationFrame = function(id) {
-			clearTimeout(id);
-		};
-}());
-
 
 tiltApp.factory('game', function($location, $rootScope, progress, replay, audio, $timeout, levels) {
 
@@ -618,17 +591,13 @@ tiltApp.directive('board', function(game, input){
 		_board = document.getElementById('game-board');
 		_canvas = document.getElementById('game-canvas');
 
-		_canvas.width = (tilt.USE_3D_BOARD) ? _canvasWidth : _bitmapSize * (8.8);
-		_canvas.height = (tilt.USE_3D_BOARD) ? _canvasHeight : _bitmapSize * (9.6 * 0.9025);
+		_canvas.width = _canvasWidth;
+		_canvas.height = _canvasHeight;
 
 		_ctx = _canvas.getContext('2d');
 
 		game.forceCompleteRedraw = true;
 		tilt.loadingStack['firstDraw'] = true;
-
-		if (!tilt.USE_3D_BOARD) {
-			angular.element(_canvas).css({ width: '91.66666%', height: '90.25%' });
-		}
 
 		_ctx.lineCap = 'round';
 		_ctx.lineJoin = 'round';
@@ -839,15 +808,11 @@ tiltApp.directive('board', function(game, input){
 
 		if (oldRotX !== _rotationX || oldRotY !== _rotationY) {
 			rotationChanged = true;
-			if (tilt.USE_3D_BOARD)
-				changed = true;
+			changed = true;
 		}
 
-		if (tilt.USE_3D_BOARD) {
-			game.tiltX = 0.03 * _rotationX;
-			game.tiltY = 0.03 * (_rotationY + tilt.PERSP_OFFSET);
-		}
-
+		game.tiltX = 0.03 * _rotationX;
+		game.tiltY = 0.03 * (_rotationY + tilt.PERSP_OFFSET);
 
 		if (changed) { // && (timeStamp - _lastDrawTime > tilt.DRAW_REFRESH_RATE)) {
 			draw();
@@ -893,24 +858,19 @@ tiltApp.directive('board', function(game, input){
 			_scope.safeApply();
 
 			game.forceCompleteRedraw = false;
-
-			if (!tilt.USE_3D_BOARD)
-				tilt.drawFrame(_ctxBG, frameX, frameY, dx, dy);
 		}
 
 		var frameColor = (game.noBounds) ? tilt.COLOR_BOARD_NO_BOUNDS : tilt.COLOR_BOARD;
 		var bgImage = (game.noBounds) ? "board_nobounds" : "board";
 		_ctx.drawImage(tilt.images[bgImage], 0, 0, tilt.BOARD_WIDTH, tilt.BOARD_HEIGHT);
 
-		if (tilt.USE_3D_BOARD) {
-			tilt.drawFrameBottom(_ctx, frameX, frameY, frameColor, dx, dy);
-			tilt.drawFrameTop(_ctx, frameX, frameY, frameColor, dx, dy);
-			_ctx.save();
-			_ctx.beginPath();
-			_ctx.rect(clipX, clipY, clipW, clipH);
-			_ctx.closePath();
-			_ctx.clip();
-		}
+		tilt.shapes.drawFrameBottom(_ctx, frameX, frameY, frameColor, dx, dy);
+		tilt.shapes.drawFrameTop(_ctx, frameX, frameY, frameColor, dx, dy);
+		_ctx.save();
+		_ctx.beginPath();
+		_ctx.rect(clipX, clipY, clipW, clipH);
+		_ctx.closePath();
+		_ctx.clip();
 
 		game.each(function(element){
 			element.draw(addDrawCall);
@@ -931,8 +891,7 @@ tiltApp.directive('board', function(game, input){
 		_drawList = [];
 
 
-		if (tilt.USE_3D_BOARD)
-			_ctx.restore();
+		_ctx.restore();
 
 	}
 
@@ -1002,4 +961,3 @@ tiltApp.directive('board', function(game, input){
 		}
 	}
 });
-

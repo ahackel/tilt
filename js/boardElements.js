@@ -370,7 +370,7 @@ var __extends = window.__extends || function (d, b) {
 			// if a block has a low depth paint only its face:
 			var depth = (this.renderDepth > 0.1) ? 1 : 0;
 
-			tilt.drawBlock(data.ctx, x, y, this.renderColor, dx, dy, this.drawEdge, depth);
+			tilt.shapes.drawBlock(data.ctx, x, y, this.renderColor, dx, dy, this.drawEdge, depth);
 
 			if (this.holeUnderMe && !this.hasWon) {
 				//var color = (this.hasWon || this.color === this.holeUnderMe.color) ? "#ffba00" : this.holeUnderMe.color;
@@ -380,7 +380,7 @@ var __extends = window.__extends || function (d, b) {
 
 				dx = -game.tiltX * 0.1;
 				dy = -game.tiltY * 0.1;
-				tilt.drawHole(data.ctx, x, y, this.holeUnderMe.color, dx, dy);
+				tilt.shapes.drawHole(data.ctx, x, y, this.holeUnderMe.color, dx, dy);
 			}
 		}
 
@@ -492,7 +492,7 @@ var __extends = window.__extends || function (d, b) {
 				dx = -game.tiltX * 0.1,
 				dy = -game.tiltY * 0.1;
 
-			tilt.drawHole(data.ctx, x, y, this.color, dx, dy);
+			tilt.shapes.drawHole(data.ctx, x, y, this.color, dx, dy);
 		}
 
 		Hole.prototype.draw = function(addDrawCall) {
@@ -584,7 +584,7 @@ var __extends = window.__extends || function (d, b) {
 			var y = data.y + tilt.ORIGIN_Y;
 
 			//data.ctx.globalAlpha = this.renderOpacity;
-			tilt.drawStar(data.ctx, x, y, game.tiltX, game.tiltY);
+			tilt.shapes.drawStar(data.ctx, x, y, game.tiltX, game.tiltY);
 
 			if (this.number > 0 && game.editor) {
 				data.ctx.drawImage(tilt.images['numbers'], _bitmapSize * (this.number - 1), 0, _bitmapSize, _bitmapSize,
@@ -760,7 +760,7 @@ var __extends = window.__extends || function (d, b) {
 		};
 
 		Button.prototype.drawButton = function(data) {
-			tilt.drawButton(data.ctx, tilt.ORIGIN_X + data.x, tilt.ORIGIN_Y + data.y, game.tiltX, game.tiltY, this.renderDepth);
+			tilt.shapes.drawButton(data.ctx, tilt.ORIGIN_X + data.x, tilt.ORIGIN_Y + data.y, game.tiltX, game.tiltY, this.renderDepth);
 		};
 
 		Button.prototype.draw = function(addDrawCall) {
