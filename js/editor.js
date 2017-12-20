@@ -101,7 +101,7 @@ tiltApp.directive('editor', function(game, input, levels){
 		else if (input.shiftKey) {
 			data.ctx.drawImage(tilt.images["delete"], x, y, 1, 1);
 		}
-		tilt.drawSelection(data.ctx, x, y);
+		tilt.shapes.drawSelection(data.ctx, x, y);
 	}
 
 	function draw(addDrawCall) {
@@ -426,4 +426,3 @@ tiltApp.directive('editor', function(game, input, levels){
 		}
 	}
 });
-

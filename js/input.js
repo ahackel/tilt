@@ -137,8 +137,8 @@ tiltApp.factory('input', function($rootElement) {
 
             var clientRect = canvas.getBoundingClientRect();
 
-            input.mouseX = Math.floor((clientX - clientRect.left) / tilt.BLOCKSIZE - tilt.ORIGIN_X);
-            input.mouseY = Math.floor((clientY - clientRect.top) / tilt.BLOCKSIZE - tilt.ORIGIN_Y);
+            input.mouseX = Math.floor((clientX - clientRect.left) / clientRect.width * tilt.BOARD_WIDTH - tilt.ORIGIN_X);
+            input.mouseY = Math.floor((clientY - clientRect.top) / clientRect.height * tilt.BOARD_HEIGHT - tilt.ORIGIN_Y);
 
             input.deltaX = 0;
             input.deltaY = 0;
