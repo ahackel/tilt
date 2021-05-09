@@ -74,12 +74,6 @@ class Tilt {
 		this.preloadedCounter = 0;
 		this.loadingStack = {};
 		this.images = [];
-
-		// disable vertical scrolling:
-		window.scrollTo(0, 1);
-		document.addEventListener("touchmove", function(){
-			event.preventDefault();
-		}, false);
 	}
 
 	_isSmallDevice() {
