@@ -532,7 +532,7 @@ function GameEndCtrl($scope, progress) {
 }
 
 function preventOverscroll(){
-	document.addEventListener("touchstart", evt => evt.preventDefault());
+	document.addEventListener("touchmove", evt => evt.preventDefault());
 }
 
 document.addEventListener("DOMContentLoaded", function() {
