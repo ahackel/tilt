@@ -531,7 +531,13 @@ tiltApp.controller('AboutCtrl', function AboutCtrl($scope, localize) {
 function GameEndCtrl($scope, progress) {
 }
 
+function preventOverscroll(){
+	document.addEventListener("touchstart", evt => evt.preventDefault());
+}
+
 document.addEventListener("DOMContentLoaded", function() {
+	
+	preventOverscroll();
 
 	var htmlElement = document.getElementsByTagName("html")[0],
 		resizeTimeout;
