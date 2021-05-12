@@ -302,17 +302,12 @@ tiltApp.controller('LoadingCtrl', function LoadingCtrl($scope, $timeout, audio, 
 		console.log('Loading completed');
 		$rootScope.resourcesLoaded = true;
 
-		if (!tilt.IOS)
+		// audio.play can only be triggered by a click:
+		var playMusic = function(){
 			audio.play('music');
-		else {
-			// on iOS audio.play can only be triggered by a click:
-
-			var playMusic = function(){
-				document.removeEventListener('touchstart', playMusic);
-				audio.play('music');
-			}
-			document.addEventListener('touchstart', playMusic);
+			document.removeEventListener('touchend', playMusic);
 		}
+		document.addEventListener('touchend', playMusic);
 
         if (window.cordova) {
 			document.addEventListener('pause', function(){
