@@ -537,7 +537,7 @@ function preventOverscroll(){
 
 document.addEventListener("DOMContentLoaded", function() {
 	
-	preventOverscroll();
+	//preventOverscroll();
 
 	var htmlElement = document.getElementsByTagName("html")[0],
 		resizeTimeout;
